@@ -11,13 +11,12 @@ import (
 func main() {
 	godotenv.Load()
 	g := gen.NewGenerator(gen.Config{
-		OutPath: "./internal/data/query", // output path
+		OutPath: "./internal/data/query",                                            // output path
 		Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
 	})
 
 	gormdb := data.NewOrmDatabase(nil)
 	g.UseDB(gormdb) // reuse your gorm db
-
 	// Generate basic type-safe DAO API for struct `model.User` following conventions
 
 	// g.ApplyBasic(
