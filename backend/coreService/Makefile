@@ -55,6 +55,16 @@ generate:
 	go generate ./...
 	go mod tidy
 
+.PHONY: service
+# generate service by proto
+service:
+	kratos proto server api/coreService/v1/user.proto -t internal/service
+
+.PHONY: run
+# run
+run:
+	kratos run
+
 .PHONY: all
 # generate all
 all:
