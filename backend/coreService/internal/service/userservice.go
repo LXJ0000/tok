@@ -4,14 +4,18 @@ import (
 	"context"
 
 	pb "coreService/api/coreService/v1"
+	"coreService/internal/biz"
 )
 
 type UserServiceService struct {
 	pb.UnimplementedUserServiceServer
+	userUc *biz.UserUsecase
 }
 
-func NewUserServiceService() *UserServiceService {
-	return &UserServiceService{}
+func NewUserServiceService(userUc *biz.UserUsecase) *UserServiceService {
+	return &UserServiceService{
+		userUc: userUc,
+	}
 }
 
 func (s *UserServiceService) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {

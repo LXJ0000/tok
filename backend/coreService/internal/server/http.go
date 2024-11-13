@@ -1,6 +1,7 @@
 package server
 
 import (
+	core "coreService/api/coreService/v1"
 	v1 "coreService/api/helloworld/v1"
 	"coreService/internal/conf"
 	"coreService/internal/service"
@@ -11,7 +12,7 @@ import (
 )
 
 // NewHTTPServer new an HTTP server.
-func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *http.Server {
+func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, userservice *service.UserServiceService, logger log.Logger) *http.Server {
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
@@ -28,5 +29,6 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 	}
 	srv := http.NewServer(opts...)
 	v1.RegisterGreeterHTTPServer(srv, greeter)
+	core.RegisterUserServiceHTTPServer(srv, userservice)
 	return srv
 }
