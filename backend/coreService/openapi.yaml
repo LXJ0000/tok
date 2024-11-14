@@ -34,7 +34,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/coreService.api.v1.UpdateUserInfoRequest'
+                            $ref: '#/components/schemas/coreService.v1.UpdateUserInfoRequest'
                 required: true
             responses:
                 "200":
@@ -42,7 +42,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/coreService.api.v1.UpdateUserInfoResponse'
+                                $ref: '#/components/schemas/coreService.v1.UpdateUserInfoResponse'
         post:
             tags:
                 - UserService
@@ -51,7 +51,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/coreService.api.v1.CreateUserRequest'
+                            $ref: '#/components/schemas/coreService.v1.CreateUserRequest'
                 required: true
             responses:
                 "200":
@@ -59,7 +59,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/coreService.api.v1.CreateUserResponse'
+                                $ref: '#/components/schemas/coreService.v1.CreateUserResponse'
     /v1/user/info:
         get:
             tags:
@@ -80,10 +80,93 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/coreService.api.v1.GetUserInfoResponse'
+                                $ref: '#/components/schemas/coreService.v1.GetUserInfoResponse'
+    /v1/video/feed:
+        post:
+            tags:
+                - VideoService
+            operationId: VideoService_FeedShortVideo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/coreService.v1.FeedShortVideoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/coreService.v1.FeedShortVideoResponse'
+    /v1/video/list:
+        post:
+            tags:
+                - VideoService
+            operationId: VideoService_ListPublishedVideo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/coreService.v1.ListPublishedVideoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/coreService.v1.ListPublishedVideoResponse'
+    /v1/video/publish:
+        post:
+            tags:
+                - VideoService
+            operationId: VideoService_PublishVideo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/coreService.v1.PublishVideoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/coreService.v1.PublishVideoResponse'
+    /v1/video/{videoId}:
+        get:
+            tags:
+                - VideoService
+            operationId: VideoService_GetVideoById
+            parameters:
+                - name: videoId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/coreService.v1.GetVideoByIdResponse'
 components:
     schemas:
-        coreService.api.v1.CreateUserRequest:
+        coreService.v1.Author:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                avatar:
+                    type: string
+                isFollowing:
+                    type: string
+        coreService.v1.CreateUserRequest:
             type: object
             properties:
                 mobile:
@@ -92,21 +175,66 @@ components:
                     type: string
                 accountId:
                     type: string
-        coreService.api.v1.CreateUserResponse:
+        coreService.v1.CreateUserResponse:
             type: object
             properties:
                 meta:
-                    $ref: '#/components/schemas/coreService.api.v1.Metadata'
+                    $ref: '#/components/schemas/coreService.v1.Metadata'
                 userId:
                     type: string
-        coreService.api.v1.GetUserInfoResponse:
+        coreService.v1.FeedShortVideoRequest:
+            type: object
+            properties:
+                latestTime:
+                    type: string
+                userId:
+                    type: string
+                feedNum:
+                    type: string
+        coreService.v1.FeedShortVideoResponse:
             type: object
             properties:
                 meta:
-                    $ref: '#/components/schemas/coreService.api.v1.Metadata'
+                    $ref: '#/components/schemas/coreService.v1.Metadata'
+                videos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/coreService.v1.Video'
+        coreService.v1.GetUserInfoResponse:
+            type: object
+            properties:
+                meta:
+                    $ref: '#/components/schemas/coreService.v1.Metadata'
                 user:
-                    $ref: '#/components/schemas/coreService.api.v1.User'
-        coreService.api.v1.Metadata:
+                    $ref: '#/components/schemas/coreService.v1.User'
+        coreService.v1.GetVideoByIdResponse:
+            type: object
+            properties:
+                meta:
+                    $ref: '#/components/schemas/coreService.v1.Metadata'
+                video:
+                    $ref: '#/components/schemas/coreService.v1.Video'
+        coreService.v1.ListPublishedVideoRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                latestTime:
+                    type: string
+                pagination:
+                    $ref: '#/components/schemas/coreService.v1.PaginationRequest'
+        coreService.v1.ListPublishedVideoResponse:
+            type: object
+            properties:
+                meta:
+                    $ref: '#/components/schemas/coreService.v1.Metadata'
+                videos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/coreService.v1.Video'
+                pagination:
+                    $ref: '#/components/schemas/coreService.v1.PaginationResponse'
+        coreService.v1.Metadata:
             type: object
             properties:
                 bizCode:
@@ -120,7 +248,60 @@ components:
                     type: array
                     items:
                         type: string
-        coreService.api.v1.UpdateUserInfoRequest:
+        coreService.v1.PaginationRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                size:
+                    type: integer
+                    format: int32
+                sort:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/coreService.v1.SortField'
+        coreService.v1.PaginationResponse:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+                count:
+                    type: integer
+                    format: int32
+        coreService.v1.PublishVideoRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                coverUrl:
+                    type: string
+                playUrl:
+                    type: string
+                description:
+                    type: string
+                userId:
+                    type: string
+        coreService.v1.PublishVideoResponse:
+            type: object
+            properties:
+                meta:
+                    $ref: '#/components/schemas/coreService.v1.Metadata'
+                videoId:
+                    type: string
+        coreService.v1.SortField:
+            type: object
+            properties:
+                field:
+                    type: string
+                order:
+                    type: integer
+                    format: enum
+        coreService.v1.UpdateUserInfoRequest:
             type: object
             properties:
                 userId:
@@ -133,12 +314,12 @@ components:
                     type: string
                 signature:
                     type: string
-        coreService.api.v1.UpdateUserInfoResponse:
+        coreService.v1.UpdateUserInfoResponse:
             type: object
             properties:
                 meta:
-                    $ref: '#/components/schemas/coreService.api.v1.Metadata'
-        coreService.api.v1.User:
+                    $ref: '#/components/schemas/coreService.v1.Metadata'
+        coreService.v1.User:
             type: object
             properties:
                 id:
@@ -165,6 +346,29 @@ components:
                     type: string
                 favoriteCount:
                     type: string
+        coreService.v1.Video:
+            type: object
+            properties:
+                id:
+                    type: string
+                title:
+                    type: string
+                author:
+                    $ref: '#/components/schemas/coreService.v1.Author'
+                playUrl:
+                    type: string
+                coverUrl:
+                    type: string
+                favoriteCount:
+                    type: string
+                commentCount:
+                    type: string
+                isFavorite:
+                    type: string
+                uploadTime:
+                    type: string
+                description:
+                    type: string
         helloworld.v1.HelloReply:
             type: object
             properties:
@@ -175,3 +379,4 @@ tags:
     - name: Greeter
       description: The greeting service definition.
     - name: UserService
+    - name: VideoService

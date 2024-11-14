@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package coreService.api.v1;
+package coreService.v1;
 
-option go_package = "coreService/api/coreService/v1;v1";
+option go_package = "github.com/LXJ0000/tok/backend/coreService;v1";
 
 import "google/api/annotations.proto";
 import "validate/validate.proto";

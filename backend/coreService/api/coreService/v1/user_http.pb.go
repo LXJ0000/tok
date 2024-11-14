@@ -19,9 +19,9 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationUserServiceCreateUser = "/coreService.api.v1.UserService/CreateUser"
-const OperationUserServiceGetUserInfo = "/coreService.api.v1.UserService/GetUserInfo"
-const OperationUserServiceUpdateUserInfo = "/coreService.api.v1.UserService/UpdateUserInfo"
+const OperationUserServiceCreateUser = "/coreService.v1.UserService/CreateUser"
+const OperationUserServiceGetUserInfo = "/coreService.v1.UserService/GetUserInfo"
+const OperationUserServiceUpdateUserInfo = "/coreService.v1.UserService/UpdateUserInfo"
 
 type UserServiceHTTPServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
