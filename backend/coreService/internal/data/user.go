@@ -3,9 +3,9 @@ package data
 import (
 	"context"
 
-	"coreService/internal/biz"
-	"coreService/internal/data/model"
-	"coreService/internal/data/query"
+	"github.com/LXJ0000/tok/backend/coreService/internal/biz"
+	"github.com/LXJ0000/tok/backend/coreService/internal/data/model"
+	"github.com/LXJ0000/tok/backend/coreService/internal/data/query"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/jinzhu/copier"

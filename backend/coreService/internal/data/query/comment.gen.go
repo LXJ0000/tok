@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"coreService/internal/data/model"
+	"github.com/LXJ0000/tok/backend/coreService/internal/data/model"
 )
 
 func newComment(db *gorm.DB, opts ...gen.DOOption) comment {

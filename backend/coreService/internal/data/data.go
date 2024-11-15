@@ -1,7 +1,7 @@
 package data
 
 import (
-	"coreService/internal/conf"
+	"github.com/LXJ0000/tok/backend/coreService/internal/conf"
 	"fmt"
 	"os"
 

@@ -1,7 +1,7 @@
 package biz
 
 import (
-	v1 "coreService/api/helloworld/v1"
+	v1 "github.com/LXJ0000/tok/backend/coreService/api/helloworld/v1"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/google/wire"

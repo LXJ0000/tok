@@ -1,7 +1,7 @@
 syntax = "proto3";
 package basicService.v1;
 
-option go_package = "github.com/LXJ0000/tok/backend/basicService;v1";
+option go_package = "github.com/LXJ0000/tok/backend/basicService/api/basicService/v1;v1";
 
 import "basicService/v1/common.proto";
 import "validate/validate.proto";

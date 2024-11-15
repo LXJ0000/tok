@@ -1,7 +1,7 @@
 package main
 
 import (
-	"coreService/internal/data"
+	"github.com/LXJ0000/tok/backend/coreService/internal/data"
 
 	"github.com/joho/godotenv"
 	"gorm.io/gen"

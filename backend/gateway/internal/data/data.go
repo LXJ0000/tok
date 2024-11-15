@@ -1,7 +1,7 @@
 package data
 
 import (
-	"gateway/internal/conf"
+	"github.com/LXJ0000/tok/backend/gateway/internal/conf"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package coreService.v1;
 
-option go_package = "github.com/LXJ0000/tok/backend/coreService;v1";
+option go_package = "github.com/LXJ0000/tok/backend/coreService/api/coreService/v1;v1";
 
 import "coreService/v1/common.proto";
 

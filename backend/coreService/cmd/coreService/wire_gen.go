@@ -7,11 +7,11 @@
 package main
 
 import (
-	"coreService/internal/biz"
-	"coreService/internal/conf"
-	"coreService/internal/data"
-	"coreService/internal/server"
-	"coreService/internal/service"
+	"github.com/LXJ0000/tok/backend/coreService/internal/biz"
+	"github.com/LXJ0000/tok/backend/coreService/internal/conf"
+	"github.com/LXJ0000/tok/backend/coreService/internal/data"
+	"github.com/LXJ0000/tok/backend/coreService/internal/server"
+	"github.com/LXJ0000/tok/backend/coreService/internal/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 )

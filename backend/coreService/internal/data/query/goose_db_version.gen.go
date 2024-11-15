@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"coreService/internal/data/model"
+	"github.com/LXJ0000/tok/backend/coreService/internal/data/model"
 )
 
 func newGooseDbVersion(db *gorm.DB, opts ...gen.DOOption) gooseDbVersion {

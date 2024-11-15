@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	v1 "basicService/api/helloworld/v1"
-	"basicService/internal/biz"
+	v1 "github.com/LXJ0000/tok/backend/basicService/api/helloworld/v1"
+	"github.com/LXJ0000/tok/backend/basicService/internal/biz"
 )
 
 // GreeterService is a greeter service.

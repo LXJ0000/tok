@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"coreService/internal/conf"
+	"github.com/LXJ0000/tok/backend/coreService/internal/conf"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"

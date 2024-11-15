@@ -55,6 +55,16 @@ generate:
 	go generate ./...
 	go mod tidy
 
+.PHONY: service
+# gen service code
+service:
+	kratos proto server api/gateway/v1/collection.proto
+	kratos proto server api/gateway/v1/comment.proto
+	kratos proto server api/gateway/v1/favorite.proto
+	kratos proto server api/gateway/v1/follow.proto
+	kratos proto server api/gateway/v1/user.proto
+	kratos proto server api/gateway/v1/video.proto
+
 .PHONY: all
 # generate all
 all:

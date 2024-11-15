@@ -1,4 +1,4 @@
-module coreService
+module github.com/LXJ0000/tok/backend/coreService
 
 go 1.21
 

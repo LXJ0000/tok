@@ -1,7 +1,7 @@
 syntax = "proto3";
 package gateway.v1;
 
-option go_package = "github.com/LXJ0000/tok/backend/gateway;v1";
+option go_package = "github.com/LXJ0000/tok/backend/gateway/api/gateway/v1;v1";
 
 import "google/api/annotations.proto";
 

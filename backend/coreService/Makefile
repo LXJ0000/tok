@@ -56,9 +56,14 @@ generate:
 	go mod tidy
 
 .PHONY: service
-# generate service by proto
+# gen service code
 service:
-	kratos proto server api/coreService/v1/user.proto -t internal/service
+	kratos proto server api/coreService/v1/collection.proto
+	kratos proto server api/coreService/v1/comment.proto
+	kratos proto server api/coreService/v1/favorite.proto
+	kratos proto server api/coreService/v1/user.proto
+	kratos proto server api/coreService/v1/video.proto
+	kratos proto server api/coreService/v1/follow.proto
 
 .PHONY: run
 # run

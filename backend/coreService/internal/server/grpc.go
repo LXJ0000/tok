@@ -1,10 +1,10 @@
 package server
 
 import (
-	core "coreService/api/coreService/v1"
-	v1 "coreService/api/helloworld/v1"
-	"coreService/internal/conf"
-	"coreService/internal/service"
+	core "github.com/LXJ0000/tok/backend/coreService/api/coreService/v1"
+	v1 "github.com/LXJ0000/tok/backend/coreService/api/helloworld/v1"
+	"github.com/LXJ0000/tok/backend/coreService/internal/conf"
+	"github.com/LXJ0000/tok/backend/coreService/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
