@@ -1,0 +1,1343 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /collection:
+        get:
+            tags:
+                - CollectionService
+            description: 列出用户的收藏夹
+            operationId: CollectionService_ListCollection
+            parameters:
+                - name: pagination.page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pagination.size
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ListCollectionResponse'
+        put:
+            tags:
+                - CollectionService
+            description: 更新收藏夹信息
+            operationId: CollectionService_UpdateCollection
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.UpdateCollectionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.UpdateCollectionResponse'
+        post:
+            tags:
+                - CollectionService
+            description: 创建收藏夹
+            operationId: CollectionService_CreateCollection
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.CreateCollectionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.CreateCollectionResponse'
+        delete:
+            tags:
+                - CollectionService
+            description: 删除收藏夹
+            operationId: CollectionService_RemoveCollection
+            parameters:
+                - name: id
+                  in: query
+                  description: '@gotags: json:"id,omitempty,string"'
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.RemoveCollectionResponse'
+    /collection/video:
+        get:
+            tags:
+                - CollectionService
+            description: 列出收藏夹中的视频
+            operationId: CollectionService_ListVideo4Collection
+            parameters:
+                - name: collectionId
+                  in: query
+                  description: '@gotags: json:"collectionId,omitempty,string"'
+                  schema:
+                    type: string
+                - name: pagination.page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pagination.size
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ListVideo4CollectionResponse'
+        post:
+            tags:
+                - CollectionService
+            description: 将视频添加到收藏夹
+            operationId: CollectionService_AddVideo2Collection
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.AddVideo2CollectionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.AddVideo2CollectionResponse'
+        delete:
+            tags:
+                - CollectionService
+            description: 从收藏夹中移除视频
+            operationId: CollectionService_RemoveVideoFromCollection
+            parameters:
+                - name: collectionId
+                  in: query
+                  description: '@gotags: json:"collectionId,omitempty,string"'
+                  schema:
+                    type: string
+                - name: videoId
+                  in: query
+                  description: '@gotags: json:"videoId,omitempty,string"'
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.RemoveVideoFromCollectionResponse'
+    /comment:
+        post:
+            tags:
+                - CommentService
+            description: 创建评论
+            operationId: CommentService_CreateComment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.CreateCommentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.CreateCommentResponse'
+        delete:
+            tags:
+                - CommentService
+            description: 删除评论
+            operationId: CommentService_RemoveComment
+            parameters:
+                - name: id
+                  in: query
+                  description: '@gotags: json:"id,omitempty,string"'
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.RemoveCommentResponse'
+    /comment/child:
+        post:
+            tags:
+                - CommentService
+            operationId: CommentService_ListChildComment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.ListChildCommentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ListChildCommentResponse'
+    /comment/video:
+        post:
+            tags:
+                - CommentService
+            description: 列出视频的评论
+            operationId: CommentService_ListComment4Video
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.ListComment4VideoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ListComment4VideoResponse'
+    /cover/upload:
+        post:
+            tags:
+                - ShortVideoCoreVideoService
+            description: 预注册上传封面
+            operationId: ShortVideoCoreVideoService_PreSign4UploadCover
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.PreSign4UploadRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.PreSign4UploadResponse'
+    /favorite:
+        post:
+            tags:
+                - FavoriteService
+            operationId: FavoriteService_AddFavorite
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.AddFavoriteRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.AddFavoriteResponse'
+        delete:
+            tags:
+                - FavoriteService
+            operationId: FavoriteService_RemoveFavorite
+            parameters:
+                - name: target
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+                - name: type
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+                - name: id
+                  in: query
+                  description: '@gotags: json:"id,omitempty,string"'
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.RemoveFavoriteResponse'
+    /favorite/video/list:
+        post:
+            tags:
+                - FavoriteService
+            operationId: FavoriteService_ListFavoriteVideo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.ListFavoriteVideoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ListFavoriteVideoResponse'
+    /file/{fileId}/finish:
+        post:
+            tags:
+                - ShortVideoCoreVideoService
+            description: 通用确认上传完成
+            operationId: ShortVideoCoreVideoService_ReportFinishUpload
+            parameters:
+                - name: fileId
+                  in: path
+                  description: |-
+                    文件id
+                     @gotags: json:"file_id,omitempty,string"
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.ReportFinishUploadRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ReportFinishUploadResponse'
+    /follow:
+        get:
+            tags:
+                - FollowService
+            operationId: FollowService_ListFollowing
+            parameters:
+                - name: userId
+                  in: query
+                  description: '@gotags: json:"userId,omitempty,string"'
+                  schema:
+                    type: string
+                - name: type
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+                - name: pagination.page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pagination.size
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ListFollowingResponse'
+        post:
+            tags:
+                - FollowService
+            operationId: FollowService_AddFollow
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.AddFollowRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.AddFollowResponse'
+        delete:
+            tags:
+                - FollowService
+            operationId: FollowService_RemoveFollow
+            parameters:
+                - name: userId
+                  in: query
+                  description: '@gotags: json:"userId,omitempty,string"'
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.RemoveFollowResponse'
+    /helloworld/{name}:
+        get:
+            tags:
+                - Greeter
+            description: Sends a greeting
+            operationId: Greeter_SayHello
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+    /user/code:
+        post:
+            tags:
+                - UserService
+            description: 获取验证码
+            operationId: UserService_GetVerificationCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.GetVerificationCodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.GetVerificationCodeResponse'
+    /user/info:
+        get:
+            tags:
+                - UserService
+            description: 获取用户信息
+            operationId: UserService_GetUserInfo
+            parameters:
+                - name: userId
+                  in: query
+                  description: '@gotags: json:"user_id,omitempty,string"'
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.GetUserInfoResponse'
+        put:
+            tags:
+                - UserService
+            description: 更新用户信息
+            operationId: UserService_UpdateUserInfo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.UpdateUserInfoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.UpdateUserInfoResponse'
+    /user/login:
+        post:
+            tags:
+                - UserService
+            description: 登录
+            operationId: UserService_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.LoginResponse'
+    /user/register:
+        post:
+            tags:
+                - UserService
+            description: 注册
+            operationId: UserService_Register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.RegisterRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.RegisterResponse'
+    /user/voucher:
+        post:
+            tags:
+                - UserService
+            operationId: UserService_BindUserVoucher
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.BindUserVoucherRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.BindUserVoucherResponse'
+        delete:
+            tags:
+                - UserService
+            operationId: UserService_UnbindUserVoucher
+            parameters:
+                - name: voucherType
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+                - name: voucher
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.UnbindUserVoucherResponse'
+    /video/feed:
+        post:
+            tags:
+                - ShortVideoCoreVideoService
+            description: 刷视频
+            operationId: ShortVideoCoreVideoService_FeedShortVideo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.FeedShortVideoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.FeedShortVideoResponse'
+    /video/finish:
+        post:
+            tags:
+                - ShortVideoCoreVideoService
+            description: 确认视频上传完成
+            operationId: ShortVideoCoreVideoService_ReportVideoFinishUpload
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.ReportVideoFinishUploadRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ReportVideoFinishUploadResponse'
+    /video/list:
+        post:
+            tags:
+                - ShortVideoCoreVideoService
+            description: 获取当前用户的发布视频列表
+            operationId: ShortVideoCoreVideoService_ListPublishedVideo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.ListPublishedVideoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ListPublishedVideoResponse'
+    /video/upload:
+        post:
+            tags:
+                - ShortVideoCoreVideoService
+            description: 预注册上传视频
+            operationId: ShortVideoCoreVideoService_PreSign4UploadVideo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.PreSign4UploadVideoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.PreSign4UploadVideoResponse'
+    /video/{videoId}:
+        get:
+            tags:
+                - ShortVideoCoreVideoService
+            description: 获取视频信息
+            operationId: ShortVideoCoreVideoService_GetVideoById
+            parameters:
+                - name: videoId
+                  in: path
+                  description: '@gotags: json:"video_id,omitempty,string"'
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.GetVideoByIdResponse'
+    file:
+        post:
+            tags:
+                - FileService
+            operationId: FileService_PreSignUploadingPublicFile
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.PreSignUploadPublicFileRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.PreSignUploadPublicFileResponse'
+    file/report:
+        post:
+            tags:
+                - FileService
+            operationId: FileService_ReportPublicFileUploaded
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/gateway.v1.ReportPublicFileUploadedRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/gateway.v1.ReportPublicFileUploadedResponse'
+components:
+    schemas:
+        gateway.v1.AddFavoriteRequest:
+            type: object
+            properties:
+                target:
+                    type: integer
+                    format: enum
+                type:
+                    type: integer
+                    format: enum
+                id:
+                    type: string
+                    description: '@gotags: json:"id,omitempty,string"'
+        gateway.v1.AddFavoriteResponse:
+            type: object
+            properties: {}
+        gateway.v1.AddFollowRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: '@gotags: json:"userId,omitempty,string"'
+        gateway.v1.AddFollowResponse:
+            type: object
+            properties: {}
+        gateway.v1.AddVideo2CollectionRequest:
+            type: object
+            properties:
+                collectionId:
+                    type: string
+                    description: '@gotags: json:"collectionId,omitempty,string"'
+                videoId:
+                    type: string
+                    description: '@gotags: json:"videoId,omitempty,string"'
+        gateway.v1.AddVideo2CollectionResponse:
+            type: object
+            properties: {}
+        gateway.v1.BindUserVoucherRequest:
+            type: object
+            properties:
+                voucherType:
+                    type: integer
+                    format: enum
+                voucher:
+                    type: string
+        gateway.v1.BindUserVoucherResponse:
+            type: object
+            properties: {}
+        gateway.v1.Collection:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: '@gotags: json:"id,omitempty,string"'
+                userId:
+                    type: string
+                    description: '@gotags: json:"userId,omitempty,string"'
+                name:
+                    type: string
+                description:
+                    type: string
+        gateway.v1.Comment:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: '@gotags: json:"id,omitempty,string"'
+                videoId:
+                    type: string
+                    description: '@gotags: json:"videoId,omitempty,string"'
+                parentId:
+                    type: string
+                    description: '@gotags: json:"parentId,omitempty,string"'
+                user:
+                    $ref: '#/components/schemas/gateway.v1.CommentUser'
+                replyUser:
+                    $ref: '#/components/schemas/gateway.v1.CommentUser'
+                content:
+                    type: string
+                date:
+                    type: string
+                likeCount:
+                    type: string
+                replyCount:
+                    type: string
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.Comment'
+        gateway.v1.CommentUser:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: '@gotags: json:"id,omitempty,string"'
+                name:
+                    type: string
+                avatar:
+                    type: string
+                isFollowing:
+                    type: boolean
+        gateway.v1.CreateCollectionRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                description:
+                    type: string
+        gateway.v1.CreateCollectionResponse:
+            type: object
+            properties:
+                collection:
+                    $ref: '#/components/schemas/gateway.v1.Collection'
+        gateway.v1.CreateCommentRequest:
+            type: object
+            properties:
+                videoId:
+                    type: string
+                    description: '@gotags: json:"videoId,omitempty,string"'
+                content:
+                    type: string
+                parentId:
+                    type: string
+                    description: '@gotags: json:"parentId,omitempty,string"'
+                replyUserId:
+                    type: string
+                    description: '@gotags: json:"replyUserId,omitempty,string"'
+        gateway.v1.CreateCommentResponse:
+            type: object
+            properties:
+                comment:
+                    $ref: '#/components/schemas/gateway.v1.Comment'
+        gateway.v1.FeedShortVideoRequest:
+            type: object
+            properties:
+                latestTime:
+                    type: string
+                    description: '@gotags: json:"latest_time,omitempty,string"'
+                userId:
+                    type: string
+                    description: '@gotags: json:"user_id,omitempty,string"'
+                feedNum:
+                    type: string
+                    description: '@gotags: json:"feed_num,omitempty,string"'
+            description: 刷视频请求消息类型
+        gateway.v1.FeedShortVideoResponse:
+            type: object
+            properties:
+                meta:
+                    $ref: '#/components/schemas/gateway.v1.Metadata'
+                videos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.Video'
+                nextTime:
+                    type: string
+                    description: '@gotags: json:"next_time,omitempty,string"'
+            description: 刷视频响应消息类型
+        gateway.v1.FollowUser:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: '@gotags: json:"id,omitempty,string"'
+                name:
+                    type: string
+                avatar:
+                    type: string
+                isFollowing:
+                    type: boolean
+        gateway.v1.GetUserInfoResponse:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/gateway.v1.User'
+        gateway.v1.GetVerificationCodeRequest:
+            type: object
+            properties:
+                mobile:
+                    type: string
+                email:
+                    type: string
+        gateway.v1.GetVerificationCodeResponse:
+            type: object
+            properties:
+                codeId:
+                    type: string
+                    description: '@gotags: json:"code_id,omitempty,string"'
+        gateway.v1.GetVideoByIdResponse:
+            type: object
+            properties:
+                video:
+                    $ref: '#/components/schemas/gateway.v1.Video'
+            description: 获取视频信息响应消息类型
+        gateway.v1.ListChildCommentRequest:
+            type: object
+            properties:
+                commentId:
+                    type: string
+                    description: '@gotags: json:"commentId,omitempty,string"'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationRequest'
+        gateway.v1.ListChildCommentResponse:
+            type: object
+            properties:
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.Comment'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationResponse'
+        gateway.v1.ListCollectionResponse:
+            type: object
+            properties:
+                collections:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.Collection'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationResponse'
+        gateway.v1.ListComment4VideoRequest:
+            type: object
+            properties:
+                videoId:
+                    type: string
+                    description: '@gotags: json:"videoId,omitempty,string"'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationRequest'
+        gateway.v1.ListComment4VideoResponse:
+            type: object
+            properties:
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.Comment'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationResponse'
+        gateway.v1.ListFavoriteVideoRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                size:
+                    type: integer
+                    format: int32
+        gateway.v1.ListFavoriteVideoResponse:
+            type: object
+            properties:
+                videos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.Video'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationResponse'
+        gateway.v1.ListFollowingResponse:
+            type: object
+            properties:
+                users:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.FollowUser'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationResponse'
+        gateway.v1.ListPublishedVideoRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: '@gotags: json:"user_id,omitempty,string"'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationRequest'
+            description: 获取当前用户的发布视频列表请求消息类型
+        gateway.v1.ListPublishedVideoResponse:
+            type: object
+            properties:
+                videoList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.Video'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationResponse'
+            description: 获取当前用户的发布视频列表响应消息类型
+        gateway.v1.ListVideo4CollectionResponse:
+            type: object
+            properties:
+                videos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.Video'
+                pagination:
+                    $ref: '#/components/schemas/gateway.v1.PaginationResponse'
+        gateway.v1.LoginRequest:
+            type: object
+            properties:
+                mobile:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+        gateway.v1.LoginResponse:
+            type: object
+            properties:
+                token:
+                    type: string
+        gateway.v1.Metadata:
+            type: object
+            properties:
+                bizCode:
+                    type: integer
+                    format: int32
+                message:
+                    type: string
+                domain:
+                    type: string
+                reason:
+                    type: array
+                    items:
+                        type: string
+        gateway.v1.PaginationRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                size:
+                    type: integer
+                    format: int32
+                sort:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/gateway.v1.SortField'
+        gateway.v1.PaginationResponse:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+                count:
+                    type: integer
+                    format: int32
+        gateway.v1.PreSign4UploadRequest:
+            type: object
+            properties:
+                hash:
+                    type: string
+                    description: md5 hash
+                fileType:
+                    type: string
+                    description: 文件类型，默认mp4
+                size:
+                    type: string
+                    description: |-
+                        文件大小，单位byte
+                         @gotags: json:"size,omitempty,string"
+                filename:
+                    type: string
+                    description: 文件名
+            description: 通用小文件单次上传请求消息类型
+        gateway.v1.PreSign4UploadResponse:
+            type: object
+            properties:
+                url:
+                    type: string
+                    description: minio上传地址
+                fileId:
+                    type: string
+                    description: |-
+                        文件id
+                         @gotags: json:"file_id,omitempty,string"
+            description: 通用小文件单次上传响应消息类型
+        gateway.v1.PreSign4UploadVideoRequest:
+            type: object
+            properties:
+                hash:
+                    type: string
+                    description: md5 hash
+                fileType:
+                    type: string
+                    description: 文件类型，默认mp4
+                size:
+                    type: string
+                    description: |-
+                        文件大小，单位byte
+                         @gotags: json:"size,omitempty,string"
+                filename:
+                    type: string
+                    description: 文件名
+            description: 预注册上传视频请求消息类型
+        gateway.v1.PreSign4UploadVideoResponse:
+            type: object
+            properties:
+                url:
+                    type: string
+                    description: minio上传地址
+                fileId:
+                    type: string
+                    description: |-
+                        文件id
+                         @gotags: json:"file_id,omitempty,string"
+            description: 预注册上传视频响应消息类型
+        gateway.v1.PreSignUploadPublicFileRequest:
+            type: object
+            properties:
+                hash:
+                    type: string
+                fileType:
+                    type: string
+                size:
+                    type: string
+                    description: 'gotags: json`size,omitempty,string`'
+        gateway.v1.PreSignUploadPublicFileResponse:
+            type: object
+            properties:
+                url:
+                    type: string
+                fileId:
+                    type: string
+                    description: '@gotags: json:"file_id,omitempty,string"'
+        gateway.v1.RegisterRequest:
+            type: object
+            properties:
+                mobile:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                codeId:
+                    type: string
+                    description: '@gotags: json:"code_id,omitempty,string"'
+                code:
+                    type: string
+        gateway.v1.RegisterResponse:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: '@gotags: json:"user_id,omitempty,string"'
+        gateway.v1.RemoveCollectionResponse:
+            type: object
+            properties: {}
+        gateway.v1.RemoveCommentResponse:
+            type: object
+            properties: {}
+        gateway.v1.RemoveFavoriteResponse:
+            type: object
+            properties: {}
+        gateway.v1.RemoveFollowResponse:
+            type: object
+            properties: {}
+        gateway.v1.RemoveVideoFromCollectionResponse:
+            type: object
+            properties: {}
+        gateway.v1.ReportFinishUploadRequest:
+            type: object
+            properties:
+                fileId:
+                    type: string
+                    description: |-
+                        文件id
+                         @gotags: json:"file_id,omitempty,string"
+            description: 通用确认上传完成请求消息类型
+        gateway.v1.ReportFinishUploadResponse:
+            type: object
+            properties:
+                url:
+                    type: string
+                    description: url
+            description: 通用确认上传完成响应消息类型
+        gateway.v1.ReportPublicFileUploadedRequest:
+            type: object
+            properties:
+                fileId:
+                    type: string
+        gateway.v1.ReportPublicFileUploadedResponse:
+            type: object
+            properties:
+                objectName:
+                    type: string
+        gateway.v1.ReportVideoFinishUploadRequest:
+            type: object
+            properties:
+                fileId:
+                    type: string
+                    description: |-
+                        文件id
+                         @gotags: json:"file_id,omitempty,string"
+                title:
+                    type: string
+                    description: 视频标题
+                coverUrl:
+                    type: string
+                    description: 视频封面地址
+                description:
+                    type: string
+                    description: 视频描述
+                videoUrl:
+                    type: string
+                    description: 视频地址
+            description: 确认视频上传完成请求消息类型
+        gateway.v1.ReportVideoFinishUploadResponse:
+            type: object
+            properties:
+                videoId:
+                    type: string
+                    description: |-
+                        视频id
+                         @gotags: json:"video_id,omitempty,string"
+            description: 确认视频上传完成响应消息类型
+        gateway.v1.SortField:
+            type: object
+            properties:
+                field:
+                    type: string
+                order:
+                    type: integer
+                    format: enum
+        gateway.v1.UnbindUserVoucherResponse:
+            type: object
+            properties: {}
+        gateway.v1.UpdateCollectionRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: '@gotags: json:"id,omitempty,string"'
+                name:
+                    type: string
+                description:
+                    type: string
+        gateway.v1.UpdateCollectionResponse:
+            type: object
+            properties:
+                collection:
+                    $ref: '#/components/schemas/gateway.v1.Collection'
+        gateway.v1.UpdateUserInfoRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: '@gotags: json:"user_id,omitempty,string"'
+                name:
+                    type: string
+                avatar:
+                    type: string
+                backgroundImage:
+                    type: string
+                signature:
+                    type: string
+        gateway.v1.UpdateUserInfoResponse:
+            type: object
+            properties: {}
+        gateway.v1.User:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: '@gotags: json:"id,omitempty,string"'
+                name:
+                    type: string
+                avatar:
+                    type: string
+                backgroundImage:
+                    type: string
+                signature:
+                    type: string
+                mobile:
+                    type: string
+                email:
+                    type: string
+                followCount:
+                    type: string
+                    description: '@gotags: json:"followCount,omitempty,string"'
+                followerCount:
+                    type: string
+                    description: '@gotags: json:"followerCount,omitempty,string"'
+                totalFavorited:
+                    type: string
+                    description: '@gotags: json:"totalFavorited,omitempty,string"'
+                workCount:
+                    type: string
+                    description: '@gotags: json:"workCount,omitempty,string"'
+                favoriteCount:
+                    type: string
+                    description: '@gotags: json:"favoriteCount,omitempty,string"'
+        gateway.v1.Video:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: '@gotags: json:"id,omitempty,string"'
+                author:
+                    $ref: '#/components/schemas/gateway.v1.VideoAuthor'
+                playUrl:
+                    type: string
+                coverUrl:
+                    type: string
+                favoriteCount:
+                    type: string
+                    description: '@gotags: json:"favoriteCount,omitempty,string"'
+                commentCount:
+                    type: string
+                    description: '@gotags: json:"commentCount,omitempty,string"'
+                isFavorite:
+                    type: boolean
+                title:
+                    type: string
+                isCollected:
+                    type: boolean
+                collectedCount:
+                    type: string
+                    description: '@gotags: json:"collectedCount,omitempty,string"'
+        gateway.v1.VideoAuthor:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: '@gotags: json:"id,omitempty,string"'
+                name:
+                    type: string
+                avatar:
+                    type: string
+                isFollowing:
+                    type: boolean
+        helloworld.v1.HelloReply:
+            type: object
+            properties:
+                message:
+                    type: string
+            description: The response message containing the greetings
+tags:
+    - name: CollectionService
+      description: 收藏夹服务
+    - name: CommentService
+      description: 评论
+    - name: FavoriteService
+      description: 点赞
+    - name: FileService
+    - name: FollowService
+      description: 关注
+    - name: Greeter
+      description: The greeting service definition.
+    - name: ShortVideoCoreVideoService
+    - name: UserService
