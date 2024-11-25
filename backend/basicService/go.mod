@@ -5,12 +5,15 @@ go 1.22.7
 toolchain go1.23.3
 
 require (
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/envoyproxy/protoc-gen-validate v1.1.0
 	github.com/go-kratos/kratos/v2 v2.8.2
 	github.com/google/wire v0.6.0
 	github.com/jinzhu/copier v0.4.0
 	github.com/joho/godotenv v1.5.1
 	go.uber.org/automaxprocs v1.6.0
+	golang.org/x/crypto v0.27.0
+	golang.org/x/sync v0.9.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20241113202542-65e8d215514f
 	google.golang.org/grpc v1.68.0
 	google.golang.org/protobuf v1.35.2
@@ -38,7 +41,6 @@ require (
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/net v0.29.0 // indirect
-	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
 	golang.org/x/text v0.18.0 // indirect
 	golang.org/x/tools v0.21.1-0.20240508182429-e35e4ccd0d2d // indirect
