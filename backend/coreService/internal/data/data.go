@@ -33,7 +33,7 @@ func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
 }
 
 func NewOrmDatabase(c *conf.Data) *gorm.DB {
-	dns := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+	dns := fmt.Sprintf(c.Database.Source,
 		os.Getenv("MYSQL_USER"),
 		os.Getenv("MYSQL_PASSWORD"),
 		os.Getenv("MYSQL_HOST"),

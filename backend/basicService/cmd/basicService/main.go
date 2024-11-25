@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/LXJ0000/tok/backend/basicService/internal/conf"
+	"github.com/joho/godotenv"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
@@ -48,6 +49,9 @@ func newApp(logger log.Logger, gs *grpc.Server, hs *http.Server) *kratos.App {
 }
 
 func main() {
+	if err := godotenv.Load("../../.env"); err != nil {
+		log.Fatal(err)
+	}
 	flag.Parse()
 	logger := log.With(log.NewStdLogger(os.Stdout),
 		"ts", log.DefaultTimestamp,
