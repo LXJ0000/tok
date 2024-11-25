@@ -27,6 +27,7 @@ type UserRepo interface {
 	Save(context.Context, *User) error
 	Update(context.Context, *User) (*User, error)
 	FindByID(context.Context, int64) (*User, error)
+	FindByIDList(context.Context, []int64) ([]*User, error)
 }
 
 // UserUsecase is a User usecase.
@@ -43,4 +44,18 @@ func NewUserUsecase(repo UserRepo, logger log.Logger) *UserUsecase {
 // CreateUser creates a User, and returns the new User.
 func (uc *UserUsecase) CreateUser(ctx context.Context, g *User) error {
 	return uc.repo.Save(ctx, g)
+}
+
+// UpdateUser updates the User, and returns the updated User.
+func (uc *UserUsecase) UpdateUser(ctx context.Context, g *User) (*User, error) {
+	return uc.repo.Update(ctx, g)
+}
+
+// GetUser gets the User by the ID.
+func (uc *UserUsecase) GetUser(ctx context.Context, id int64) (*User, error) {
+	return uc.repo.FindByID(ctx, id)
+}
+
+func (uc *UserUsecase) GetUserByIdList(ctx context.Context, userIdList []int64) ([]*User, error) {
+	return uc.repo.FindByIDList(ctx, userIdList)
 }

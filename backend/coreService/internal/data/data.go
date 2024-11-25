@@ -1,9 +1,10 @@
 package data
 
 import (
-	"github.com/LXJ0000/tok/backend/coreService/internal/conf"
 	"fmt"
 	"os"
+
+	"github.com/LXJ0000/tok/backend/coreService/internal/conf"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
@@ -39,7 +40,6 @@ func NewOrmDatabase(c *conf.Data) *gorm.DB {
 		os.Getenv("MYSQL_PORT"),
 		os.Getenv("MYSQL_DB"),
 	)
-	log.Info("dns: ", dns)
 	db, err := gorm.Open(mysql.Open(dns), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
