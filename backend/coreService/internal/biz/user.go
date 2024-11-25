@@ -25,7 +25,7 @@ type User struct {
 // UserRepo is a Greater repo.
 type UserRepo interface {
 	Save(context.Context, *User) error
-	Update(context.Context, *User) (*User, error)
+	Update(context.Context, *User) error
 	FindByID(context.Context, int64) (*User, error)
 	FindByIDList(context.Context, []int64) ([]*User, error)
 }
@@ -47,7 +47,7 @@ func (uc *UserUsecase) CreateUser(ctx context.Context, g *User) error {
 }
 
 // UpdateUser updates the User, and returns the updated User.
-func (uc *UserUsecase) UpdateUser(ctx context.Context, g *User) (*User, error) {
+func (uc *UserUsecase) UpdateUser(ctx context.Context, g *User) error {
 	return uc.repo.Update(ctx, g)
 }
 

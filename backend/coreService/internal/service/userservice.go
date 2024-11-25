@@ -60,7 +60,7 @@ func (s *UserServiceService) UpdateUserInfo(ctx context.Context, req *pb.UpdateU
 		BackgroundImage: req.BackgroundImage,
 		Signature:       req.Signature,
 	}
-	if _, err := s.userUc.UpdateUser(ctx, user); err != nil {
+	if err := s.userUc.UpdateUser(ctx, user); err != nil {
 		return nil, err
 	}
 
