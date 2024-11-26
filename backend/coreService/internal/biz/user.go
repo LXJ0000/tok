@@ -4,7 +4,9 @@ import (
 	"context"
 	"time"
 
+	"github.com/LXJ0000/tok/backend/coreService/internal/infra/utils"
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/google/uuid"
 )
 
 // User is a User model.
@@ -43,6 +45,8 @@ func NewUserUsecase(repo UserRepo, logger log.Logger) *UserUsecase {
 
 // CreateUser creates a User, and returns the new User.
 func (uc *UserUsecase) CreateUser(ctx context.Context, g *User) error {
+	g.ID = utils.GenID()
+	g.Name = uuid.New().String()
 	return uc.repo.Save(ctx, g)
 }
 

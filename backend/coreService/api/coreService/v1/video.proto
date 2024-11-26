@@ -52,9 +52,11 @@ message Video {
     string cover_url = 5; // 视频封面地址
     int64 favorite_count = 6; // 视频的点赞总数
     int64 comment_count = 7; // 视频的评论总数
-    int64 is_favorite = 8; // 0-未点赞，1-已点赞
-    string upload_time = 9; // 视频上传时间
-    string description = 10; // 视频描述
+    int64 collect_count = 8; // 视频的收藏总数
+    int64 is_favorite = 9; // 0-未点赞，1-已点赞
+    int64 is_collect = 10; // 0-未收藏，1-已收藏
+    string upload_time = 11; // 视频上传时间
+    string description = 12; // 视频描述
 }
 
 message FeedShortVideoRequest {

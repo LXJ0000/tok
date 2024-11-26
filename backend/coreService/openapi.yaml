@@ -363,7 +363,11 @@ components:
                     type: string
                 commentCount:
                     type: string
+                collectCount:
+                    type: string
                 isFavorite:
+                    type: string
+                isCollect:
                     type: string
                 uploadTime:
                     type: string
