@@ -10,11 +10,11 @@ import (
 
 type VideoServiceService struct {
 	pb.UnimplementedVideoServiceServer
-	videoUc biz.VideoUsecase
+	videoUc *biz.VideoUsecase
 }
 
-func NewVideoServiceService() *VideoServiceService {
-	return &VideoServiceService{}
+func NewVideoServiceService(videoUc *biz.VideoUsecase) *VideoServiceService {
+	return &VideoServiceService{videoUc: videoUc}
 }
 
 func (s *VideoServiceService) FeedShortVideo(ctx context.Context, req *pb.FeedShortVideoRequest) (*pb.FeedShortVideoResponse, error) {
@@ -61,7 +61,7 @@ func (s *VideoServiceService) PublishVideo(ctx context.Context, req *pb.PublishV
 }
 
 func (s *VideoServiceService) ListPublishedVideo(ctx context.Context, req *pb.ListPublishedVideoRequest) (*pb.ListPublishedVideoResponse, error) {
-	vs, err := s.videoUc.GetVideoByUserID(ctx, req.UserId, req.LatestTime , int(req.Pagination.Size))
+	vs, err := s.videoUc.GetVideoByUserID(ctx, req.UserId, req.LatestTime, int(req.Pagination.Size))
 	if err != nil {
 		return nil, err
 	}

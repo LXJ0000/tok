@@ -37,12 +37,16 @@ func (r *videoRepo) Save(ctx context.Context, g *biz.Video) error {
 func (r *videoRepo) Update(ctx context.Context, g *biz.Video) error {
 	var video model.Video
 	copier.Copy(&video, g)
-	return r.data.db.Model(&model.Video{}).Where("id = ?", g.ID).Updates(&video).Error
+	return r.data.db.Model(&model.Video{}).Where("id = ?", g.ID).
+		Where("is_deleted = 0").
+		Updates(&video).Error
 }
 
 func (r *videoRepo) FindByID(ctx context.Context, id int64) (*biz.Video, error) {
 	var video model.Video
-	if err := r.data.db.Model(&model.Video{}).Where("id = ?", id).First(&video).Error; err != nil {
+	if err := r.data.db.Model(&model.Video{}).Where("id = ?", id).
+		Where("is_deleted = 0").
+		First(&video).Error; err != nil {
 		return nil, err
 	}
 	var g biz.Video
@@ -52,7 +56,9 @@ func (r *videoRepo) FindByID(ctx context.Context, id int64) (*biz.Video, error) 
 
 func (r *videoRepo) FindByIDList(ctx context.Context, ids []int64) ([]*biz.Video, error) {
 	var videos []*model.Video
-	if err := r.data.db.Model(&model.Video{}).Where("id in (?)", ids).Find(&videos).Error; err != nil {
+	if err := r.data.db.Model(&model.Video{}).Where("id in (?)", ids).
+		Where("is_deleted = 0").
+		Find(&videos).Error; err != nil {
 		return nil, err
 	}
 	var greeters []*biz.Video
@@ -69,7 +75,9 @@ func (r *videoRepo) FindByUserID(ctx context.Context, userID int64, lastTime int
 	if lastTime <= 0 {
 		lastTime = math.MaxInt64
 	}
-	if err := r.data.db.Model(&model.Video{}).Where("user_id = ? and create_time < ?", userID, lastTime).Limit(limit).Order("id desc").Find(&videos).Error; err != nil {
+	if err := r.data.db.Model(&model.Video{}).Where("user_id = ? and create_time < ?", userID, lastTime).
+		Where("is_deleted = 0").
+		Limit(limit).Order("id desc").Find(&videos).Error; err != nil {
 		return nil, err
 	}
 	var greeters []*biz.Video
@@ -83,7 +91,10 @@ func (r *videoRepo) FindByUserID(ctx context.Context, userID int64, lastTime int
 
 func (r *videoRepo) Find(ctx context.Context, lastTime int64, limit int) ([]*biz.Video, error) {
 	var videos []*model.Video
-	if err := r.data.db.Model(&model.Video{}).Where("create_time < ?", lastTime).Limit(limit).Order("id desc").Find(&videos).Error; err != nil {
+	if err := r.data.db.Model(&model.Video{}).
+		Where("create_time < ?", lastTime).
+		Where("is_deleted = 0").
+		Limit(limit).Order("id desc").Find(&videos).Error; err != nil {
 		return nil, err
 	}
 	var greeters []*biz.Video

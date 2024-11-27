@@ -8,7 +8,7 @@ import (
 )
 
 // ProviderSet is service providers.
-var ProviderSet = wire.NewSet(NewGreeterService, NewUserServiceService)
+var ProviderSet = wire.NewSet(NewGreeterService, NewUserServiceService, NewVideoServiceService)
 
 var (
 	SuccessMeta = &pb.Metadata{
