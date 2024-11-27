@@ -60,7 +60,7 @@ generate:
 service:
 	kratos proto server api/coreService/v1/collection.proto
 	kratos proto server api/coreService/v1/comment.proto
-	kratos proto server api/coreService/v1/favorite.proto
+	kratos proto server api/coreService/v1/inter.proto
 	kratos proto server api/coreService/v1/user.proto
 	kratos proto server api/coreService/v1/video.proto
 	kratos proto server api/coreService/v1/follow.proto

@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package coreService.v1;
+
+option go_package = "github.com/LXJ0000/tok/backend/coreService/api/coreService/v1;v1";
+
+import "coreService/v1/common.proto";
+
+service InterService {
+    rpc IncrReadCount(IncrReadCountRequest) returns (IncrReadCountResponse);
+    rpc Like(LikeRequest) returns (LikeResponse);
+    rpc CancelLike(CancelLikeRequest) returns (CancelLikeResponse);
+    rpc Collect(CollectRequest) returns (CollectResponse);
+    rpc CancelCollect(CancelCollectRequest) returns (CancelCollectResponse);
+    rpc Stat(StatRequest) returns (StatResponse);
+}
+
+message IncrReadCountRequest {
+    string biz = 1;
+    int64 biz_id = 2;
+}
+
+message IncrReadCountResponse {
+    Metadata meta = 1;
+}
+
+message LikeRequest {
+    string biz = 1;
+    int64 biz_id = 2;
+    int64 user_id = 3;
+}
+
+message LikeResponse {
+    Metadata meta = 1;
+}
+
+message CancelLikeRequest {
+    string biz = 1;
+    int64 biz_id = 2;
+    int64 user_id = 3;
+}
+
+message CancelLikeResponse {
+    Metadata meta = 1;
+}
+
+message CollectRequest {
+    string biz = 1;
+    int64 biz_id = 2;
+    int64 user_id = 3;
+    int64 collection_id = 4;
+}
+
+message CollectResponse {
+    Metadata meta = 1;
+}
+
+message CancelCollectRequest {
+    string biz = 1;
+    int64 biz_id = 2;
+    int64 user_id = 3;
+    int64 collection_id = 4;
+}
+
+message CancelCollectResponse {
+    Metadata meta = 1;
+}
+
+message StatRequest {
+    string biz = 1;
+    int64 biz_id = 2;
+    int64 user_id = 3;
+}
+
+message StatResponse {
+    Metadata meta = 1;
+    int64 like_count = 2;
+    int64 collect_count = 3;
+    int64 read_count = 4;
+    bool is_like = 5;
+    bool is_collect = 6;
+}
