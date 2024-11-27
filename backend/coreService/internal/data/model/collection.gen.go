@@ -16,7 +16,7 @@ type Collection struct {
 	UserID      int64     `gorm:"column:user_id;not null;comment:用户ID" json:"user_id"`                                   // 用户ID
 	Title       string    `gorm:"column:title;not null;comment:标题" json:"title"`                                         // 标题
 	Description string    `gorm:"column:description;not null;comment:描述" json:"description"`                             // 描述
-	IsDeleted   bool      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
+	IsDeleted   int32     `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 	CreateTime  time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateTime  time.Time `gorm:"column:update_time;not null;default:CURRENT_TIMESTAMP;comment:更新时间" json:"update_time"` // 更新时间
 }

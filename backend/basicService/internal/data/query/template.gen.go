@@ -30,7 +30,7 @@ func newTemplate(db *gorm.DB, opts ...gen.DOOption) template {
 	_template.ID = field.NewInt64(tableName, "id")
 	_template.Title = field.NewString(tableName, "title")
 	_template.Content = field.NewString(tableName, "content")
-	_template.IsDeleted = field.NewBool(tableName, "is_deleted")
+	_template.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_template.CreateTime = field.NewTime(tableName, "create_time")
 	_template.UpdateTime = field.NewTime(tableName, "update_time")
 
@@ -46,7 +46,7 @@ type template struct {
 	ID         field.Int64  // 模板ID
 	Title      field.String // 标题
 	Content    field.String // 内容
-	IsDeleted  field.Bool   // 是否删除
+	IsDeleted  field.Int32  // 是否删除
 	CreateTime field.Time   // 创建时间
 	UpdateTime field.Time   // 更新时间
 
@@ -68,7 +68,7 @@ func (t *template) updateTableName(table string) *template {
 	t.ID = field.NewInt64(table, "id")
 	t.Title = field.NewString(table, "title")
 	t.Content = field.NewString(table, "content")
-	t.IsDeleted = field.NewBool(table, "is_deleted")
+	t.IsDeleted = field.NewInt32(table, "is_deleted")
 	t.CreateTime = field.NewTime(table, "create_time")
 	t.UpdateTime = field.NewTime(table, "update_time")
 

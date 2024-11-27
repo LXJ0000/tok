@@ -37,7 +37,7 @@ func newVideo(db *gorm.DB, opts ...gen.DOOption) video {
 	_video.CollectCount = field.NewInt64(tableName, "collect_count")
 	_video.ForwardCount = field.NewInt64(tableName, "forward_count")
 	_video.CommentCount = field.NewInt64(tableName, "comment_count")
-	_video.IsDeleted = field.NewBool(tableName, "is_deleted")
+	_video.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_video.CreateTime = field.NewTime(tableName, "create_time")
 	_video.UpdateTime = field.NewTime(tableName, "update_time")
 
@@ -60,7 +60,7 @@ type video struct {
 	CollectCount field.Int64  // 收藏数
 	ForwardCount field.Int64  // 转发数
 	CommentCount field.Int64  // 评论数
-	IsDeleted    field.Bool   // 是否删除
+	IsDeleted    field.Int32  // 是否删除
 	CreateTime   field.Time   // 创建时间
 	UpdateTime   field.Time   // 更新时间
 
@@ -89,7 +89,7 @@ func (v *video) updateTableName(table string) *video {
 	v.CollectCount = field.NewInt64(table, "collect_count")
 	v.ForwardCount = field.NewInt64(table, "forward_count")
 	v.CommentCount = field.NewInt64(table, "comment_count")
-	v.IsDeleted = field.NewBool(table, "is_deleted")
+	v.IsDeleted = field.NewInt32(table, "is_deleted")
 	v.CreateTime = field.NewTime(table, "create_time")
 	v.UpdateTime = field.NewTime(table, "update_time")
 

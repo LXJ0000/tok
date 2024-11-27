@@ -18,8 +18,8 @@ type File struct {
 	Hash       string    `gorm:"column:hash;not null;comment:文件哈希" json:"hash"`                                         // 文件哈希
 	FileSize   int64     `gorm:"column:file_size;not null;comment:文件大小" json:"file_size"`                               // 文件大小
 	FileType   string    `gorm:"column:file_type;not null;comment:文件类型" json:"file_type"`                               // 文件类型
-	Uploaded   bool      `gorm:"column:uploaded;not null;comment:是否上传" json:"uploaded"`                                 // 是否上传
-	IsDeleted  bool      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
+	Uploaded   int32     `gorm:"column:uploaded;not null;comment:是否上传" json:"uploaded"`                                 // 是否上传
+	IsDeleted  int32     `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 	CreateTime time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateTime time.Time `gorm:"column:update_time;not null;default:CURRENT_TIMESTAMP;comment:更新时间" json:"update_time"` // 更新时间
 }

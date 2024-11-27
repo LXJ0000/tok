@@ -23,8 +23,11 @@ var (
 	File           *file
 	Follow         *follow
 	GooseDbVersion *gooseDbVersion
+	Interaction    *interaction
 	Template       *template
 	User           *user
+	UserCollect    *userCollect
+	UserLike       *userLike
 	Video          *video
 )
 
@@ -36,8 +39,11 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	File = &Q.File
 	Follow = &Q.Follow
 	GooseDbVersion = &Q.GooseDbVersion
+	Interaction = &Q.Interaction
 	Template = &Q.Template
 	User = &Q.User
+	UserCollect = &Q.UserCollect
+	UserLike = &Q.UserLike
 	Video = &Q.Video
 }
 
@@ -50,8 +56,11 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		File:           newFile(db, opts...),
 		Follow:         newFollow(db, opts...),
 		GooseDbVersion: newGooseDbVersion(db, opts...),
+		Interaction:    newInteraction(db, opts...),
 		Template:       newTemplate(db, opts...),
 		User:           newUser(db, opts...),
+		UserCollect:    newUserCollect(db, opts...),
+		UserLike:       newUserLike(db, opts...),
 		Video:          newVideo(db, opts...),
 	}
 }
@@ -65,8 +74,11 @@ type Query struct {
 	File           file
 	Follow         follow
 	GooseDbVersion gooseDbVersion
+	Interaction    interaction
 	Template       template
 	User           user
+	UserCollect    userCollect
+	UserLike       userLike
 	Video          video
 }
 
@@ -81,8 +93,11 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		File:           q.File.clone(db),
 		Follow:         q.Follow.clone(db),
 		GooseDbVersion: q.GooseDbVersion.clone(db),
+		Interaction:    q.Interaction.clone(db),
 		Template:       q.Template.clone(db),
 		User:           q.User.clone(db),
+		UserCollect:    q.UserCollect.clone(db),
+		UserLike:       q.UserLike.clone(db),
 		Video:          q.Video.clone(db),
 	}
 }
@@ -104,8 +119,11 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		File:           q.File.replaceDB(db),
 		Follow:         q.Follow.replaceDB(db),
 		GooseDbVersion: q.GooseDbVersion.replaceDB(db),
+		Interaction:    q.Interaction.replaceDB(db),
 		Template:       q.Template.replaceDB(db),
 		User:           q.User.replaceDB(db),
+		UserCollect:    q.UserCollect.replaceDB(db),
+		UserLike:       q.UserLike.replaceDB(db),
 		Video:          q.Video.replaceDB(db),
 	}
 }
@@ -117,8 +135,11 @@ type queryCtx struct {
 	File           IFileDo
 	Follow         IFollowDo
 	GooseDbVersion IGooseDbVersionDo
+	Interaction    IInteractionDo
 	Template       ITemplateDo
 	User           IUserDo
+	UserCollect    IUserCollectDo
+	UserLike       IUserLikeDo
 	Video          IVideoDo
 }
 
@@ -130,8 +151,11 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		File:           q.File.WithContext(ctx),
 		Follow:         q.Follow.WithContext(ctx),
 		GooseDbVersion: q.GooseDbVersion.WithContext(ctx),
+		Interaction:    q.Interaction.WithContext(ctx),
 		Template:       q.Template.WithContext(ctx),
 		User:           q.User.WithContext(ctx),
+		UserCollect:    q.UserCollect.WithContext(ctx),
+		UserLike:       q.UserLike.WithContext(ctx),
 		Video:          q.Video.WithContext(ctx),
 	}
 }

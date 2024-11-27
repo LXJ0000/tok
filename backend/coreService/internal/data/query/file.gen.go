@@ -33,8 +33,8 @@ func newFile(db *gorm.DB, opts ...gen.DOOption) file {
 	_file.Hash = field.NewString(tableName, "hash")
 	_file.FileSize = field.NewInt64(tableName, "file_size")
 	_file.FileType = field.NewString(tableName, "file_type")
-	_file.Uploaded = field.NewBool(tableName, "uploaded")
-	_file.IsDeleted = field.NewBool(tableName, "is_deleted")
+	_file.Uploaded = field.NewInt32(tableName, "uploaded")
+	_file.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_file.CreateTime = field.NewTime(tableName, "create_time")
 	_file.UpdateTime = field.NewTime(tableName, "update_time")
 
@@ -53,8 +53,8 @@ type file struct {
 	Hash       field.String // 文件哈希
 	FileSize   field.Int64  // 文件大小
 	FileType   field.String // 文件类型
-	Uploaded   field.Bool   // 是否上传
-	IsDeleted  field.Bool   // 是否删除
+	Uploaded   field.Int32  // 是否上传
+	IsDeleted  field.Int32  // 是否删除
 	CreateTime field.Time   // 创建时间
 	UpdateTime field.Time   // 更新时间
 
@@ -79,8 +79,8 @@ func (f *file) updateTableName(table string) *file {
 	f.Hash = field.NewString(table, "hash")
 	f.FileSize = field.NewInt64(table, "file_size")
 	f.FileType = field.NewString(table, "file_type")
-	f.Uploaded = field.NewBool(table, "uploaded")
-	f.IsDeleted = field.NewBool(table, "is_deleted")
+	f.Uploaded = field.NewInt32(table, "uploaded")
+	f.IsDeleted = field.NewInt32(table, "is_deleted")
 	f.CreateTime = field.NewTime(table, "create_time")
 	f.UpdateTime = field.NewTime(table, "update_time")
 

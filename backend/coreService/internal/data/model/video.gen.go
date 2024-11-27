@@ -22,7 +22,7 @@ type Video struct {
 	CollectCount int64     `gorm:"column:collect_count;not null;comment:收藏数" json:"collect_count"`                        // 收藏数
 	ForwardCount int64     `gorm:"column:forward_count;not null;comment:转发数" json:"forward_count"`                        // 转发数
 	CommentCount int64     `gorm:"column:comment_count;not null;comment:评论数" json:"comment_count"`                        // 评论数
-	IsDeleted    bool      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
+	IsDeleted    int32     `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 	CreateTime   time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateTime   time.Time `gorm:"column:update_time;not null;default:CURRENT_TIMESTAMP;comment:更新时间" json:"update_time"` // 更新时间
 }

@@ -18,7 +18,7 @@ type Account struct {
 	Password   string    `gorm:"column:password;not null;comment:密码" json:"password"`                                   // 密码
 	Salt       string    `gorm:"column:salt;not null;comment:密码盐" json:"salt"`                                          // 密码盐
 	Number     string    `gorm:"column:number;not null;comment:号码" json:"number"`                                       // 号码
-	IsDeleted  bool      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
+	IsDeleted  int32     `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 	CreateTime time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateTime time.Time `gorm:"column:update_time;not null;default:CURRENT_TIMESTAMP;comment:更新时间" json:"update_time"` // 更新时间
 }

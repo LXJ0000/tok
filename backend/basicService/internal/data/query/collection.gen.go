@@ -31,7 +31,7 @@ func newCollection(db *gorm.DB, opts ...gen.DOOption) collection {
 	_collection.UserID = field.NewInt64(tableName, "user_id")
 	_collection.Title = field.NewString(tableName, "title")
 	_collection.Description = field.NewString(tableName, "description")
-	_collection.IsDeleted = field.NewBool(tableName, "is_deleted")
+	_collection.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_collection.CreateTime = field.NewTime(tableName, "create_time")
 	_collection.UpdateTime = field.NewTime(tableName, "update_time")
 
@@ -48,7 +48,7 @@ type collection struct {
 	UserID      field.Int64  // 用户ID
 	Title       field.String // 标题
 	Description field.String // 描述
-	IsDeleted   field.Bool   // 是否删除
+	IsDeleted   field.Int32  // 是否删除
 	CreateTime  field.Time   // 创建时间
 	UpdateTime  field.Time   // 更新时间
 
@@ -71,7 +71,7 @@ func (c *collection) updateTableName(table string) *collection {
 	c.UserID = field.NewInt64(table, "user_id")
 	c.Title = field.NewString(table, "title")
 	c.Description = field.NewString(table, "description")
-	c.IsDeleted = field.NewBool(table, "is_deleted")
+	c.IsDeleted = field.NewInt32(table, "is_deleted")
 	c.CreateTime = field.NewTime(table, "create_time")
 	c.UpdateTime = field.NewTime(table, "update_time")
 

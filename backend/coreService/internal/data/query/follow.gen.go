@@ -30,7 +30,7 @@ func newFollow(db *gorm.DB, opts ...gen.DOOption) follow {
 	_follow.ID = field.NewInt64(tableName, "id")
 	_follow.UserID = field.NewInt64(tableName, "user_id")
 	_follow.TargetUserID = field.NewInt64(tableName, "target_user_id")
-	_follow.IsDeleted = field.NewBool(tableName, "is_deleted")
+	_follow.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_follow.CreateTime = field.NewTime(tableName, "create_time")
 	_follow.UpdateTime = field.NewTime(tableName, "update_time")
 
@@ -46,7 +46,7 @@ type follow struct {
 	ID           field.Int64 // 关注ID
 	UserID       field.Int64 // 用户ID
 	TargetUserID field.Int64 // 被关注的用户ID
-	IsDeleted    field.Bool  // 是否删除
+	IsDeleted    field.Int32 // 是否删除
 	CreateTime   field.Time  // 创建时间
 	UpdateTime   field.Time  // 更新时间
 
@@ -68,7 +68,7 @@ func (f *follow) updateTableName(table string) *follow {
 	f.ID = field.NewInt64(table, "id")
 	f.UserID = field.NewInt64(table, "user_id")
 	f.TargetUserID = field.NewInt64(table, "target_user_id")
-	f.IsDeleted = field.NewBool(table, "is_deleted")
+	f.IsDeleted = field.NewInt32(table, "is_deleted")
 	f.CreateTime = field.NewTime(table, "create_time")
 	f.UpdateTime = field.NewTime(table, "update_time")
 

@@ -34,7 +34,7 @@ func newComment(db *gorm.DB, opts ...gen.DOOption) comment {
 	_comment.ToUserID = field.NewInt64(tableName, "to_user_id")
 	_comment.Content = field.NewString(tableName, "content")
 	_comment.FirstComments = field.NewString(tableName, "first_comments")
-	_comment.IsDeleted = field.NewBool(tableName, "is_deleted")
+	_comment.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_comment.CreateTime = field.NewTime(tableName, "create_time")
 	_comment.UpdateTime = field.NewTime(tableName, "update_time")
 
@@ -54,7 +54,7 @@ type comment struct {
 	ToUserID      field.Int64  // 评论所回复的用户ID
 	Content       field.String // 评论内容
 	FirstComments field.String // 最开始的几条子评论
-	IsDeleted     field.Bool   // 是否删除
+	IsDeleted     field.Int32  // 是否删除
 	CreateTime    field.Time   // 创建时间
 	UpdateTime    field.Time   // 更新时间
 
@@ -80,7 +80,7 @@ func (c *comment) updateTableName(table string) *comment {
 	c.ToUserID = field.NewInt64(table, "to_user_id")
 	c.Content = field.NewString(table, "content")
 	c.FirstComments = field.NewString(table, "first_comments")
-	c.IsDeleted = field.NewBool(table, "is_deleted")
+	c.IsDeleted = field.NewInt32(table, "is_deleted")
 	c.CreateTime = field.NewTime(table, "create_time")
 	c.UpdateTime = field.NewTime(table, "update_time")
 

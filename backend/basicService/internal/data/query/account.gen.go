@@ -33,7 +33,7 @@ func newAccount(db *gorm.DB, opts ...gen.DOOption) account {
 	_account.Password = field.NewString(tableName, "password")
 	_account.Salt = field.NewString(tableName, "salt")
 	_account.Number = field.NewString(tableName, "number")
-	_account.IsDeleted = field.NewBool(tableName, "is_deleted")
+	_account.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_account.CreateTime = field.NewTime(tableName, "create_time")
 	_account.UpdateTime = field.NewTime(tableName, "update_time")
 
@@ -52,7 +52,7 @@ type account struct {
 	Password   field.String // 密码
 	Salt       field.String // 密码盐
 	Number     field.String // 号码
-	IsDeleted  field.Bool   // 是否删除
+	IsDeleted  field.Int32  // 是否删除
 	CreateTime field.Time   // 创建时间
 	UpdateTime field.Time   // 更新时间
 
@@ -77,7 +77,7 @@ func (a *account) updateTableName(table string) *account {
 	a.Password = field.NewString(table, "password")
 	a.Salt = field.NewString(table, "salt")
 	a.Number = field.NewString(table, "number")
-	a.IsDeleted = field.NewBool(table, "is_deleted")
+	a.IsDeleted = field.NewInt32(table, "is_deleted")
 	a.CreateTime = field.NewTime(table, "create_time")
 	a.UpdateTime = field.NewTime(table, "update_time")
 

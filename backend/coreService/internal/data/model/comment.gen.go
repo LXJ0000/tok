@@ -19,7 +19,7 @@ type Comment struct {
 	ToUserID      int64     `gorm:"column:to_user_id;comment:评论所回复的用户ID" json:"to_user_id"`                                // 评论所回复的用户ID
 	Content       string    `gorm:"column:content;not null;comment:评论内容" json:"content"`                                   // 评论内容
 	FirstComments string    `gorm:"column:first_comments;not null;comment:最开始的几条子评论" json:"first_comments"`                // 最开始的几条子评论
-	IsDeleted     bool      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
+	IsDeleted     int32     `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 	CreateTime    time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateTime    time.Time `gorm:"column:update_time;not null;default:CURRENT_TIMESTAMP;comment:更新时间" json:"update_time"` // 更新时间
 }

@@ -35,7 +35,7 @@ func newUser(db *gorm.DB, opts ...gen.DOOption) user {
 	_user.Avatar = field.NewString(tableName, "avatar")
 	_user.BackgroundImage = field.NewString(tableName, "background_image")
 	_user.Signature = field.NewString(tableName, "signature")
-	_user.IsDeleted = field.NewBool(tableName, "is_deleted")
+	_user.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_user.CreateTime = field.NewTime(tableName, "create_time")
 	_user.UpdateTime = field.NewTime(tableName, "update_time")
 
@@ -56,7 +56,7 @@ type user struct {
 	Avatar          field.String // 头像
 	BackgroundImage field.String // 背景图片
 	Signature       field.String // 签名
-	IsDeleted       field.Bool   // 是否删除
+	IsDeleted       field.Int32  // 是否删除
 	CreateTime      field.Time   // 创建时间
 	UpdateTime      field.Time   // 更新时间
 
@@ -83,7 +83,7 @@ func (u *user) updateTableName(table string) *user {
 	u.Avatar = field.NewString(table, "avatar")
 	u.BackgroundImage = field.NewString(table, "background_image")
 	u.Signature = field.NewString(table, "signature")
-	u.IsDeleted = field.NewBool(table, "is_deleted")
+	u.IsDeleted = field.NewInt32(table, "is_deleted")
 	u.CreateTime = field.NewTime(table, "create_time")
 	u.UpdateTime = field.NewTime(table, "update_time")
 
