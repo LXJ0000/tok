@@ -37,7 +37,10 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	videoRepo := data.NewVideoRepo(dataData, logger)
 	videoUsecase := biz.NewVideoUsecase(videoRepo, userRepo, logger)
 	videoServiceService := service.NewVideoServiceService(videoUsecase)
-	grpcServer := server.NewGRPCServer(confServer, greeterService, userServiceService, videoServiceService, logger)
+	interRepo := data.NewInterRepo(dataData, logger)
+	interUsecase := biz.NewInterUsecase(interRepo, logger)
+	interServiceService := service.NewInterServiceService(interUsecase)
+	grpcServer := server.NewGRPCServer(confServer, greeterService, userServiceService, videoServiceService, interServiceService, logger)
 	httpServer := server.NewHTTPServer(confServer, greeterService, userServiceService, videoServiceService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {

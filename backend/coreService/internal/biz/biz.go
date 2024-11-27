@@ -8,7 +8,7 @@ import (
 )
 
 // ProviderSet is biz providers.
-var ProviderSet = wire.NewSet(NewGreeterUsecase, NewUserUsecase, NewVideoUsecase)
+var ProviderSet = wire.NewSet(NewGreeterUsecase, NewUserUsecase, NewVideoUsecase, NewInterUsecase)
 
 var (
 	// ErrUserNotFound is user not found.

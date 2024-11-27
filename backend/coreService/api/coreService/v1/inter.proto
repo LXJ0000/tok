@@ -74,9 +74,9 @@ message StatRequest {
 
 message StatResponse {
     Metadata meta = 1;
-    int64 like_count = 2;
-    int64 collect_count = 3;
-    int64 read_count = 4;
+    int64 like_cnt = 2;
+    int64 collect_cnt = 3;
+    int64 read_cnt = 4;
     bool is_like = 5;
     bool is_collect = 6;
 }
