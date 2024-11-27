@@ -38,7 +38,7 @@ type VideoRepo interface {
 	Update(context.Context, *Video) error
 	FindByID(context.Context, int64) (*Video, error)
 	FindByIDList(context.Context, []int64) ([]*Video, error)
-	FindByUserID(ctx context.Context, userID int64, lastID int64, limit int) ([]*Video, error)
+	FindByUserID(ctx context.Context, userID int64, lastTime int64, limit int) ([]*Video, error)
 	Find(ctx context.Context, lastID int64, limit int) ([]*Video, error)
 }
 
@@ -100,6 +100,13 @@ func (uc *VideoUsecase) GetVideoByIdList(ctx context.Context, videoIdList []int6
 	}
 	wg.Wait()
 	return vs, nil
+}
+
+func (uc *VideoUsecase) GetVideoByUserID(ctx context.Context, userID, lastTime int64, limit int) ([]*Video, error) {
+	if lastTime <= 0 {
+		lastTime = math.MaxInt64
+	}
+	return uc.repo.FindByUserID(ctx, userID, lastTime, limit)
 }
 
 func (uc *VideoUsecase) Feed(ctx context.Context, userID, lastTime int64, limit int) ([]*Video, error) {

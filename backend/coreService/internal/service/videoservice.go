@@ -61,7 +61,18 @@ func (s *VideoServiceService) PublishVideo(ctx context.Context, req *pb.PublishV
 }
 
 func (s *VideoServiceService) ListPublishedVideo(ctx context.Context, req *pb.ListPublishedVideoRequest) (*pb.ListPublishedVideoResponse, error) {
-	return &pb.ListPublishedVideoResponse{}, nil
+	vs, err := s.videoUc.GetVideoByUserID(ctx, req.UserId, req.LatestTime , int(req.Pagination.Size))
+	if err != nil {
+		return nil, err
+	}
+	resp := make([]*pb.Video, 0, len(vs))
+	for _, v := range vs {
+		resp = append(resp, biz2Pb(v))
+	}
+	return &pb.ListPublishedVideoResponse{
+		Videos: resp,
+		Meta:   SuccessMeta,
+	}, nil
 }
 
 func (s *VideoServiceService) GetVideoByIdList(ctx context.Context, req *pb.GetVideoByIdListRequest) (*pb.GetVideoByIdListResponse, error) {

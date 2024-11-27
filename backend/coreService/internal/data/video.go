@@ -64,12 +64,12 @@ func (r *videoRepo) FindByIDList(ctx context.Context, ids []int64) ([]*biz.Video
 	return greeters, nil
 }
 
-func (r *videoRepo) FindByUserID(ctx context.Context, userID int64, lastID int64, limit int) ([]*biz.Video, error) {
+func (r *videoRepo) FindByUserID(ctx context.Context, userID int64, lastTime int64, limit int) ([]*biz.Video, error) {
 	var videos []*model.Video
-	if lastID <= 0 {
-		lastID = math.MaxInt64
+	if lastTime <= 0 {
+		lastTime = math.MaxInt64
 	}
-	if err := r.data.db.Model(&model.Video{}).Where("user_id = ? and id < ?", userID, lastID).Limit(limit).Order("id desc").Find(&videos).Error; err != nil {
+	if err := r.data.db.Model(&model.Video{}).Where("user_id = ? and create_time < ?", userID, lastTime).Limit(limit).Order("id desc").Find(&videos).Error; err != nil {
 		return nil, err
 	}
 	var greeters []*biz.Video
