@@ -13,8 +13,8 @@ type Greeter struct {
 
 // GreeterRepo is a Greater repo.
 type GreeterRepo interface {
-	Save(context.Context, *Greeter) (*Greeter, error)
-	Update(context.Context, *Greeter) (*Greeter, error)
+	Save(context.Context, *Greeter) error
+	Update(context.Context, *Greeter) error
 	FindByID(context.Context, int64) (*Greeter, error)
 	ListByHello(context.Context, string) ([]*Greeter, error)
 	ListAll(context.Context) ([]*Greeter, error)
@@ -32,7 +32,7 @@ func NewGreeterUsecase(repo GreeterRepo, logger log.Logger) *GreeterUsecase {
 }
 
 // CreateGreeter creates a Greeter, and returns the new Greeter.
-func (uc *GreeterUsecase) CreateGreeter(ctx context.Context, g *Greeter) (*Greeter, error) {
+func (uc *GreeterUsecase) CreateGreeter(ctx context.Context, g *Greeter) error {
 	uc.log.WithContext(ctx).Infof("CreateGreeter: %v", g.Hello)
 	return uc.repo.Save(ctx, g)
 }
