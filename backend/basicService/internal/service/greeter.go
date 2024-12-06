@@ -21,8 +21,8 @@ func NewGreeterService(uc *biz.GreeterUsecase) *GreeterService {
 
 // SayHello implements helloworld.GreeterServer.
 func (s *GreeterService) SayHello(ctx context.Context, in *v1.HelloRequest) (*v1.HelloReply, error) {
-	g, err := s.uc.CreateGreeter(ctx, &biz.Greeter{Hello: in.Name})
-	if err != nil {
+	g := biz.Greeter{Hello: in.Name}
+	if err := s.uc.CreateGreeter(ctx, &g); err != nil {
 		return nil, err
 	}
 	return &v1.HelloReply{Message: "Hello " + g.Hello}, nil
