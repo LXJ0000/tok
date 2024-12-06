@@ -9,10 +9,12 @@ package main
 import (
 	"github.com/LXJ0000/tok/backend/basicService/internal/biz"
 	"github.com/LXJ0000/tok/backend/basicService/internal/data"
+	minio2 "github.com/LXJ0000/tok/backend/basicService/internal/infra/pkg/object_storage/minio"
 	"github.com/LXJ0000/tok/backend/basicService/internal/server"
 	"github.com/LXJ0000/tok/backend/basicService/internal/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/minio/minio-go/v7"
 )
 
 import (
@@ -22,7 +24,7 @@ import (
 // Injectors from wire.go:
 
 // wireApp init kratos application.
-func wireApp(logger log.Logger) (*kratos.App, func(), error) {
+func wireApp(logger log.Logger, core *minio.Core) (*kratos.App, func(), error) {
 	dataData, cleanup, err := data.NewData(logger)
 	if err != nil {
 		return nil, nil, err
@@ -30,7 +32,11 @@ func wireApp(logger log.Logger) (*kratos.App, func(), error) {
 	accountRepo := data.NewAccountRepo(dataData, logger)
 	accountUsecase := biz.NewAccountUsecase(accountRepo, logger)
 	accountServiceService := service.NewAccountServiceService(accountUsecase)
-	grpcServer := server.NewGRPCServer(accountServiceService, logger)
+	fileRepo := data.NewFileRepo(dataData, logger)
+	minioMinio := minio2.NewMinio(core)
+	fileUsecase := biz.NewFileUsecase(fileRepo, minioMinio, logger)
+	fileServiceService := service.NewFileServiceService(fileUsecase)
+	grpcServer := server.NewGRPCServer(accountServiceService, fileServiceService, logger)
 	app := newApp(logger, grpcServer)
 	return app, func() {
 		cleanup()

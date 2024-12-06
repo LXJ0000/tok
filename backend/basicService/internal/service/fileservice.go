@@ -4,14 +4,17 @@ import (
 	"context"
 
 	pb "github.com/LXJ0000/tok/backend/basicService/api/basicService/v1"
+	"github.com/LXJ0000/tok/backend/basicService/internal/biz"
 )
 
 type FileServiceService struct {
 	pb.UnimplementedFileServiceServer
+
+	s *biz.FileUsecase
 }
 
-func NewFileServiceService() *FileServiceService {
-	return &FileServiceService{}
+func NewFileServiceService(s *biz.FileUsecase) *FileServiceService {
+	return &FileServiceService{s: s}
 }
 
 func (s *FileServiceService) PreSignGet(ctx context.Context, req *pb.PreSignGetRequest) (*pb.PreSignGetResponse, error) {

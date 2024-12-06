@@ -52,7 +52,7 @@ func main() {
 		"span.id", tracing.SpanID(),
 	)
 
-	app, cleanup, err := wireApp(logger)
+	app, cleanup, err := wireApp(logger, nil)
 	if err != nil {
 		panic(err)
 	}
