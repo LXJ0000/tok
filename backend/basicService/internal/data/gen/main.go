@@ -15,7 +15,7 @@ func main() {
 		Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
 	})
 
-	gormdb := data.NewOrmDatabase(nil)
+	gormdb := data.NewOrmDatabase()
 	g.UseDB(gormdb) // reuse your gorm db
 	// Generate basic type-safe DAO API for struct `model.User` following conventions
 

@@ -8,7 +8,6 @@ package main
 
 import (
 	"github.com/LXJ0000/tok/backend/basicService/internal/biz"
-	"github.com/LXJ0000/tok/backend/basicService/internal/conf"
 	"github.com/LXJ0000/tok/backend/basicService/internal/data"
 	"github.com/LXJ0000/tok/backend/basicService/internal/server"
 	"github.com/LXJ0000/tok/backend/basicService/internal/service"
@@ -23,17 +22,16 @@ import (
 // Injectors from wire.go:
 
 // wireApp init kratos application.
-func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
-	dataData, cleanup, err := data.NewData(confData, logger)
+func wireApp(logger log.Logger) (*kratos.App, func(), error) {
+	dataData, cleanup, err := data.NewData(logger)
 	if err != nil {
 		return nil, nil, err
 	}
-	greeterRepo := data.NewGreeterRepo(dataData, logger)
-	greeterUsecase := biz.NewGreeterUsecase(greeterRepo, logger)
-	greeterService := service.NewGreeterService(greeterUsecase)
-	grpcServer := server.NewGRPCServer(confServer, greeterService, logger)
-	httpServer := server.NewHTTPServer(confServer, greeterService, logger)
-	app := newApp(logger, grpcServer, httpServer)
+	accountRepo := data.NewAccountRepo(dataData, logger)
+	accountUsecase := biz.NewAccountUsecase(accountRepo, logger)
+	accountServiceService := service.NewAccountServiceService(accountUsecase)
+	grpcServer := server.NewGRPCServer(accountServiceService, logger)
+	app := newApp(logger, grpcServer)
 	return app, func() {
 		cleanup()
 	}, nil
