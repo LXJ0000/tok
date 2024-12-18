@@ -10,14 +10,25 @@ import (
 type FileServiceService struct {
 	pb.UnimplementedFileServiceServer
 
-	s *biz.FileUsecase
+	fileUc *biz.FileUsecase
 }
 
-func NewFileServiceService(s *biz.FileUsecase) *FileServiceService {
-	return &FileServiceService{s: s}
+func NewFileServiceService(fileUc *biz.FileUsecase) *FileServiceService {
+	return &FileServiceService{fileUc: fileUc}
 }
 
 func (s *FileServiceService) PreSignGet(ctx context.Context, req *pb.PreSignGetRequest) (*pb.PreSignGetResponse, error) {
+	g := &biz.File{
+		ID:         req.FileContext.FileId,
+		DomainName: req.FileContext.Domain,
+		BizName:    req.FileContext.BizName,
+		Hash:       req.FileContext.Hash,
+		FileType:   req.FileContext.FileType,
+		FileSize:   req.FileContext.Size,
+		ExpireSeconds: req.FileContext.ExpireSeconds,
+		FileName: req.FileContext.Filename,
+	}
+	s.fileUc.PreSignGet(ctx, g)
 	return &pb.PreSignGetResponse{}, nil
 }
 

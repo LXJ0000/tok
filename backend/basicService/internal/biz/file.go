@@ -2,11 +2,13 @@ package biz
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
 	"github.com/LXJ0000/tok/backend/basicService/internal/infra/pkg/object_storage/minio"
 	"github.com/go-kratos/kratos/v2/log"
+	"gorm.io/gorm"
 )
 
 // File is a File model.
@@ -21,10 +23,18 @@ type File struct {
 	IsDeleted  int32     `json:"is_deleted"`  // 是否删除
 	CreateTime time.Time `json:"create_time"` // 创建时间
 	UpdateTime time.Time `json:"update_time"` // 更新时间
+
+	// Extra
+	FileName      string `json:"file_name"`      // 文件名
+	ExpireSeconds int64  `json:"expire_seconds"` // 过期时间
 }
 
 func (f *File) objectName() string {
 	return fmt.Sprintf("%s/%d", f.BizName, f.ID)
+}
+
+func (f *File) Expired(second int64) time.Duration {
+	return time.Duration(second * 1000000000)
 }
 
 type SlicingFile struct {
@@ -67,19 +77,35 @@ func (uc *FileUsecase) CreateFile(ctx context.Context, g *File) error {
 
 // PreSignGet returns the pre-signed URL for downloading the file
 func (uc *FileUsecase) PreSignGet(ctx context.Context, g *File) (string, error) {
-	uc.repo.FindUploadedByID(ctx, g.ID)
-	// return uc.minio.PreSignGetUrl(ctx, g.DomainName, "", g.), nil
-	return "", nil
+	f, err := uc.repo.FindUploadedByID(ctx, g.ID)
+	if err != nil {
+		return "", err
+	}
+	return uc.minio.PreSignGetUrl(ctx, f.DomainName, f.objectName(), g.FileName, g.Expired(g.ExpireSeconds))
 }
 
 // PreSignPut returns the pre-signed URL for uploading the file, and the file ID if the file already exists
 func (uc *FileUsecase) PreSignPut(ctx context.Context, g *File) (string, int64, error) {
-	return "", 0, nil
+	if err := uc.repo.Save(ctx, g); err != nil {
+		return "", 0, err
+	}
+	url, err := uc.minio.PreSignPutUrl(ctx, g.DomainName, g.objectName(), g.Expired(g.ExpireSeconds))
+	if err != nil {
+		return "", 0, err
+	}
+	return url, g.ID, nil
 }
 
 // CheckFileExistedAndGetFile checks if the file exists and returns the file ID if it does
 func (uc *FileUsecase) CheckFileExistedAndGetFile(ctx context.Context, g *File) (int64, bool, error) {
-	return 0, false, nil
+	f, err := uc.repo.FindUploadedByHash(ctx, g.Hash)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return 0, false, nil
+		}
+		return 0, false, err
+	}
+	return f.ID, true, nil
 }
 
 // ReportUploaded reports that the file has been uploaded
@@ -108,5 +134,5 @@ func (uc *FileUsecase) RemoveFile(ctx context.Context, g *File) error {
 }
 
 func (uc *FileUsecase) GetInfoById(ctx context.Context, domainName, bizName string, fileId int64) (*File, error) {
-	return nil, nil
+	return uc.repo.FindByID(ctx, fileId)
 }
